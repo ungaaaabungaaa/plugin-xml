@@ -1,0 +1,17 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>XML plugin — TypeScript regression evidence</title><style>body{margin:0;background:#0d1117;color:#e6edf3;font:14px/1.4 system-ui}main{max-width:1120px;margin:24px auto;padding:0 28px}h1{font-size:26px;margin:0 0 8px}h2{font-size:17px;margin:18px 0 8px}p{color:#9da7b1;margin:6px 0}pre{padding:12px 16px;background:#161b22;border:1px solid #30363d;border-radius:8px;font:12px/1.45 monospace;white-space:pre-wrap;overflow-wrap:anywhere}.red{color:#ffb1af}.green{color:#7ee787}.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}footer{margin:20px 0;color:#9da7b1;font-size:13px}</style><main><h1>XML plugin · typed Prettier configuration</h1><p>Captured local compiler and test output for prettier/plugin-xml issue #981.</p><p>Fix: importing the plugin adds the four XML options to Prettier’s Options interface.</p><h2>Before · missing option types / invalid values accepted</h2><pre class="red">test/types/plugin.ts(15,7): error TS2322: Type &#x27;unknown&#x27; is not assignable to type &#x27;\&quot;strict\&quot; | \&quot;preserve\&quot; | \&quot;ignore\&quot; | undefined&#x27;.
+test/types/plugin.ts(17,7): error TS2322: Type &#x27;unknown&#x27; is not assignable to type &#x27;boolean | undefined&#x27;.
+test/types/plugin.ts(18,7): error TS2322: Type &#x27;unknown&#x27; is not assignable to type &#x27;boolean | undefined&#x27;.
+test/types/plugin.ts(19,7): error TS2322: Type &#x27;unknown&#x27; is not assignable to type &#x27;\&quot;preserve\&quot; | \&quot;single\&quot; | \&quot;double\&quot; | undefined&#x27;.
+test/types/plugin.ts(47,3): error TS2578: Unused &#x27;@ts-expect-error&#x27; directive.
+test/types/plugin.ts(52,3): error TS2578: Unused &#x27;@ts-expect-error&#x27; directive.
+test/types/plugin.ts(57,3): error TS2578: Unused &#x27;@ts-expect-error&#x27; directive.
+test/types/plugin.ts(62,3): error TS2578: Unused &#x27;@ts-expect-error&#x27; directive.</pre><div class="grid"><section><h2>After · complete suite on Node 24</h2><pre class="green">Test Suites: 4 passed, 4 total
+Tests:       18 passed, 18 total
+Snapshots:   11 passed, 11 total
+Time:        0.649 s, estimated 1 s
+Ran all test suites.
+Done in 0.91s.</pre></section><section><h2>After · local suite on Node 20</h2><pre class="green">Test Suites: 4 passed, 4 total
+Tests:       18 passed, 18 total
+Snapshots:   11 passed, 11 total
+Time:        0.757 s, estimated 1 s
+Ran all test suites.</pre></section></div><p>Node 24 lint and formatting pass. Packed declarations checked with Prettier 3.0.0 and 3.9.10.</p><p>CI setup limitation: the existing lint-staged 17.6.0 requires Node ≥22.22.1. A fresh Node 20 install fails its engine check. The local Node 20 test run used dependencies installed with Node 24.</p><footer>Rendered report of captured output, not an editor screenshot. Thanks to @gtbuchanan for the report. Prepared with OpenAI Codex assistance; no upstream acceptance claimed.</footer></main></html>
